@@ -1,9 +1,6 @@
 
 
-getComputerChoice();
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+
 
 
 
@@ -52,7 +49,7 @@ function playRound (playerSelection, computerSelection){
         if (computerSelection === "Rock"){
             return "You Lose! Rock beats Scissors";
         }
-        else if(computerSelection === "paper"){
+        else if(computerSelection === "Paper"){
             return "You Win! Scissors beats Paper";
         }
         else{
@@ -60,3 +57,13 @@ function playRound (playerSelection, computerSelection){
         }
     }
 }
+
+function game(){
+    for(let i = 0; i<5; i++){
+        let player = window.prompt("enter your choice of rock, paper, or scissors!");
+        let computer = getComputerChoice();
+        console.log(playRound(player, computer));
+    }
+}
+
+game();
