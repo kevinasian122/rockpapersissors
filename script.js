@@ -21,49 +21,99 @@ function getComputerChoice(){
 
 function playRound (playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
-    console.log(playerSelection);
-    console.log(computerSelection);
+    let str = playerSelection +", "+ computerSelection;
+    
     if (playerSelection === "paper"){
         if (computerSelection === "Rock"){
+            playerClick();
             return "You Win! Paper beats Rock";
         }
         else if(computerSelection === "Scissors"){
+            computerClick();
             return "You Lose! Scissors beats Paper";
         }
         else{
-            return "it's a tie!";
+            return str + ", it's a tie!";
         }
     }
     if (playerSelection === "rock"){
         if (computerSelection === "Paper"){
+            computerClick();
             return "You Lose! Paper beats Rock";
         }
         else if(computerSelection === "Scissors"){
+            playerClick();
             return "You Win! Rock beats Scissors";
         }
         else{
-            return "it's a tie!";
+            return str + ", it's a tie!";
         }
     }
     if (playerSelection === "scissors"){
         if (computerSelection === "Rock"){
+            computerClick();
             return "You Lose! Rock beats Scissors";
         }
         else if(computerSelection === "Paper"){
+            playerClick();
             return "You Win! Scissors beats Paper";
         }
         else{
-            return "it's a tie!";
+            return str + ", it's a tie!";
         }
     }
 }
 
-function game(){
-    for(let i = 0; i<5; i++){
-        let player = window.prompt("enter your choice of rock, paper, or scissors!");
-        let computer = getComputerChoice();
-        console.log(playRound(player, computer));
-    }
+
+const div = document.querySelector(".results");
+
+let plclick = 0;
+let coclick = 0;
+function playerClick(){
+    plclick++;
+    document.querySelector(".pclick").innerHTML = "player: " + plclick;
+    
+}
+function computerClick(){
+    coclick++;
+    document.querySelector(".cclick").innerHTML = "computer: " + coclick;
 }
 
-game();
+
+const rock = document.querySelector('.rock');
+rock.addEventListener('click', () => {
+    const result = document.createElement('div');
+    result.textContent = playRound("rock", getComputerChoice());
+    div.appendChild(result);
+    getWinner();
+    
+    
+});
+
+const scissors = document.querySelector('.scissors');
+scissors.addEventListener('click', () => {
+    const result = document.createElement('div');
+    result.textContent = playRound("scissors", getComputerChoice());
+    div.appendChild(result);
+    getWinner();
+});
+
+const paper = document.querySelector('.paper');
+paper.addEventListener('click', () => {
+    const result = document.createElement('div');
+    result.textContent = playRound("paper", getComputerChoice());
+    div.appendChild(result);
+    getWinner();
+});
+
+function getWinner(){
+    const winner = document.createElement('div');
+    if(plclick === 5){
+        winner.textContent = "You are the winner!"
+    }
+    else if (coclick === 5){
+        winner.textContent = "The computer is the winner!"
+    }
+    div.appendChild(winner);
+}
+
